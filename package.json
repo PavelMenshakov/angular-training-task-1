@@ -1,0 +1,12 @@
+{
+  "name": "TaskOne",
+  "namelower": "taskone",
+  "version": "0.0.1",
+  "main": "index.html",
+  "description": "AngularJS project. Task 1",
+  "readme": "README.md",
+  "scripts": {
+    "postinstall": "bower install",
+	"start": "index.html"
+  }
+}
