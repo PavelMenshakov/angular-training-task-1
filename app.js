@@ -31,16 +31,11 @@ app.directive('userName', function () {		//create directive for user name valida
 	return {
 		require:'ngModel',
 		link:function (scope, elm, attrs, ngModelCtrl) {
-
-			ngModelCtrl.$parsers.unshift(function (viewValue) {    //view validation
-				ngModelCtrl.$setValidity('userName', ngModelCtrl.$isEmpty(viewValue) || isValid(viewValue));
-				return viewValue;
-			});
-
-			ngModelCtrl.$formatters.unshift(function (modelValue) { //model validation
-				ngModelCtrl.$setValidity('userName', ngModelCtrl.$isEmpty(modelValue) ||  isValid(modelValue));
-				return modelValue;
-			});
+			
+			ngModelCtrl.$validators['userName'] =  function(modelValue, viewValue) {
+				return ngModelCtrl.$isEmpty(viewValue) || isValid(viewValue);
+			};
+			
 		}
 	};
 });
@@ -50,17 +45,9 @@ app.directive('ageValidation', function () {   //create directive for age valida
 		require:'ngModel',
 		link:function (scope, elm, attrs, ngModelCtrl) {
 
-			ngModelCtrl.$parsers.unshift(function (viewValue) {		//view validation
-				ngModelCtrl.$setValidity('ageValidation',  
-					ngModelCtrl.$isEmpty(viewValue) || (viewValue > 18 && viewValue < 65));
-				return viewValue;
-			});
-
-			ngModelCtrl.$formatters.unshift(function (modelValue) {  //model validation
-				ngModelCtrl.$setValidity('ageValidation', 
-					ngModelCtrl.$isEmpty(modelValue) || (modelValue > 18 && modelValue < 65));
-				return modelValue;
-			});
+			ngModelCtrl.$validators['ageValidation'] =  function(modelValue, viewValue) {
+				return ngModelCtrl.$isEmpty(modelValue) || (modelValue > 18 && modelValue < 65);
+			};
 		}
 	};
 });
@@ -74,18 +61,10 @@ app.directive('dateValidation', function () {   //create directive for date vali
 	return {
 		require:'ngModel',
 		link:function (scope, elm, attrs, ngModelCtrl) {
-
-			ngModelCtrl.$parsers.unshift(function (viewValue) {		//view validation
-				ngModelCtrl.$setValidity('dateValidation', 
-					ngModelCtrl.$isEmpty(viewValue) || isValid(viewValue));
-				return viewValue;
-			});
-
-			ngModelCtrl.$formatters.unshift(function (modelValue) {  //model validation
-				ngModelCtrl.$setValidity('dateValidation', 
-					ngModelCtrl.$isEmpty(modelValue) || isValid(modelValue));
-				return modelValue;
-			});
+			
+			ngModelCtrl.$validators['dateValidation'] =  function(modelValue, viewValue) {
+				return ngModelCtrl.$isEmpty(modelValue) || isValid(modelValue);
+			};
 		}
 	};
 });
@@ -99,17 +78,9 @@ app.directive('emailValidation', function() {  // email validation
             require:'ngModel',
             link:function (scope, elm, attrs, ngModelCtrl) {
 
-                ngModelCtrl.$parsers.unshift(function (viewValue) {		//view validation
-                    ngModelCtrl.$setValidity('dateValidation', 
-						ngModelCtrl.$isEmpty(viewValue) || isValid(viewValue));
-                    return viewValue;
-                });
-
-                ngModelCtrl.$formatters.unshift(function (modelValue) {  //model validation
-                    ngModelCtrl.$setValidity('dateValidation', 
-						ngModelCtrl.$isEmpty(modelValue) || isValid(modelValue));
-                    return modelValue;
-                });
+				ngModelCtrl.$validators['emailValidation'] =  function(modelValue, viewValue) {
+					return ngModelCtrl.$isEmpty(modelValue) || isValid(modelValue);
+				};
             }
         };
 });

@@ -4,24 +4,29 @@
 		<meta charset="UTF-8">
 		<link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 		<title>Edit user data</title>
+		<style>
+			.error {
+				color: red;
+			}
+		</style>
 	</head>
 	<body ng-app="taskOne" ng-cloak>
 		<div ng-controller="appController" class="container">
 			<form name="userForm" class="form-group" novalidate>
 				Name: <input user-name name="name" class="form-control" type="text" ng-model="user.name" ng-model-options="{ updateOn: 'blur' }" required /><br />
-				<span style="color:red" ng-show="userForm.name.$dirty && userForm.name.$invalid">
+				<span class="error" ng-show="userForm.name.$dirty && userForm.name.$invalid">
 					<span> User name must be more than 3 symbols,<br />only first letter in uppercase of the word,<br />only letters.</span>
 				</span><br />
 				E-mail: <input email-validation name="email" class="form-control" type="text" ng-model="user.email" /><br />
-				<span style="color:red" ng-show="userForm.email.$dirty && userForm.email.$invalid">
+				<span class="error" ng-show="userForm.email.$dirty && userForm.email.$invalid">
 					<span>Email must be in epam.com domain</span>
 				</span><br />
 				Birthday: <input date-validation name="birthday" class="form-control" type="text" ng-model="user.birthday" /><br />
-				<span style="color:red" ng-show="userForm.birthday.$dirty && userForm.birthday.$invalid">
+				<span class="error" ng-show="userForm.birthday.$dirty && userForm.birthday.$invalid">
 					<span>Date format is YY-MM-DD or YYYY-MM-DD</span>
 				</span><br />
 				Age: <input age-validation name="age" class="form-control" type="number" ng-model="user.age" value="" required /><br />	
-				<span style="color:red" ng-show="userForm.age.$dirty && userForm.age.$invalid">
+				<span class="error" ng-show="userForm.age.$dirty && userForm.age.$invalid">
 					<span> Age must be between 18 and 65.</span>
 				</span><br />
 				<input class="btn btn-default" type="button" ng-click="reset()" value="Reset" />
@@ -44,7 +49,6 @@
 
 	
 	<script src="bower_components/jquery/dist/jquery.min.js"></script>
-	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="bower_components/angular/angular.min.js"></script>
 	<script src="app.js"></script>
 	</body>
